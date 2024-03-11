@@ -55,3 +55,46 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+
+
+
+--Fortune 500 companies with the most employees.
+
+SELECT company_name,employees
+FROM fortune_companies
+GROUP BY company_name
+HAVING employees>=1500
+ORDER BY employees desc LIMIT 5;
+
+
+
+--Company benefits for new or expecting parents.
+
+SELECT company_name,
+CASE 
+  WHEN maternity_leave_weeks >= 10 THEN 'Best benefits'
+  WHEN maternity_leave_weeks >= 6 THEN 'Acceptable'
+  ELSE 'could be better'
+END as mother_friendliness
+FROM fortune_companies LIMIT 10 ;
+
+
+
+-- Average employee tenure for technology companies in the Fortune 500.
+
+SELECT company_name,avg_employee_tenure
+FROM fortune_companies
+WHERE industry = 'Technology' 
+AND avg_employee_tenure >=5;
+
+
+
+--Total of Fortune 500 employees per industry. 
+
+SELECT industry, SUM (employees)
+FROM fortune_companies
+GROUP BY industry 
+
+
+
+
